@@ -1,41 +1,56 @@
-import React from 'react';
-import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useState } from 'react';
+import { Button, Image, StatusBar, StyleSheet, Text, TextInput, View } from 'react-native';
 
-export default function App() {
-  const id = '123';
-  const name = 'Brian';
-  const email = 'Email@.com';
-  const phone = '664-123-4567';
+
+export default function MyForm() {
+  const [ID, setIDText] = useState("");
+  const [nombre, setNombreText] = useState("");
+  const [email, setEmailText] = useState("");
+  const [telefono, setTelefonoText] = useState("");
+  const [displayText, setDisplayText] = useState("");
+
+  const handlePress = () => {
+    setDisplayText(`ID: ${ID}, Nombre: ${nombre}, Email: ${email}, Teléfono: ${telefono}`);
+    setIDText('');
+    setNombreText('');
+    setEmailText('');
+    setTelefonoText('');
+  };
+
 
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={require('./assets/Welcome1.png')} />
 
-      <Text>ID:</Text>
       <TextInput
         style={styles.input}
-        value={id}
-        editable={true}
+        placeholder="ID"
+        value={ID}
+        onChangeText={setIDText}
       />
-      <Text>Nombre:</Text>
       <TextInput
         style={styles.input}
-        value={name}
-        editable={true}
+        placeholder="Nombre"
+        value={nombre}
+        onChangeText={setNombreText}
       />
-      <Text>Email:</Text>
       <TextInput
         style={styles.input}
+        placeholder="Email"
         value={email}
-        editable={true}
+        onChangeText={setEmailText}
       />
-      <Text>Phone:</Text>
       <TextInput
         style={styles.input}
-        value={phone}
-        editable={true}
+        placeholder="Teléfono"
+        value={telefono}
+        onChangeText={setTelefonoText}
       />
-      <Button title="Submit" onPress={() => { }} />
+
+      <Button title="Registrarme" onPress={handlePress} />
+      <Text>{displayText}</Text>
+      <StatusBar style="auto" />
+
       <Image style={styles.image} source={require('./assets/NFL.png')} />
     </View>
   );
@@ -56,5 +71,14 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     paddingLeft: 8,
     width: '100%',
+  },
+  resultContainer: {
+    marginTop: 20,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+    width: '100%',
+    alignItems: 'center',
   },
 });
